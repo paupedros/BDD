@@ -1,3 +1,4 @@
+
 SQL
 ###
 
@@ -7,25 +8,25 @@ SQL
 Entrar a mysql
 **************
 
-.. code-block::
+.. code-block:: sql
 
     mysql -u root -p
 
 Llistar databases
 *****************
-.. code-block::
+.. code-block:: sql
 
     show databases;
 
 Crear databases
 ***************
-.. code-block::
+.. code-block:: sql
 
     create database nom;
 
 Utilitzar una database
 ***********************
-.. code-block::
+.. code-block:: sql
 
     use nom;
 
@@ -34,7 +35,7 @@ Utilitzar una database
 
 Crear una taula amb diferents tipus de dades
 ********************************************
-.. code-block::
+.. code-block:: sql
 
     Create table uno (
         codi int,
@@ -44,13 +45,13 @@ Crear una taula amb diferents tipus de dades
 
 Llistar taules
 **************
-.. code-block::
+.. code-block:: sql
 
     show tables;
 
 Veure taula
 ***********
-.. code-block::
+.. code-block:: sql
 
     desc nomTaula;
 
@@ -59,7 +60,7 @@ Veure taula
 
 --- TEXT ---
 ************
-.. code-block::
+.. code-block:: sql
 
     char(tamany)
         Longitud fixa (allarga els caracters fins al tamany amb espais si fa falta)
@@ -83,28 +84,45 @@ DateTime
 
 Year
 
--- RESTRICCIONS --
-==================
+--- RESTRICCIONS ---
+====================
+
+- Una taula només pot tenir una clau primària
+- La clau primària no accepta duplicats ni valors NULL
+- Unique en canvi si accepta valors NULL. Podem tenir varies columnes UNIQUE
 
 NULL | NOT NULL
 ***************
 
-PRIMARY KEY | KEY
+PRIMARY KEY = KEY
 *****************
 
-.. code-block::
+.. code-block:: sql
 
     Create table dos(
         codi int PRIMARY KEY,
         nom tinytext DEFAULT "Pau"
     );
 
-UNIQUE | UNIQUE KEY
+UNIQUE = UNIQUE KEY
+*******************
 
---- DEFAULT ---
-***************
 
-.. code-block::
+
+CHECK
+*****
+
+.. code-block:: sql
+
+    create table mascota(
+        nom varchar(50) primary key,
+        especie varchar(20) check(especie='perro' or especie='gato' or especie='pajaro')
+    );
+
+DEFAULT
+*******
+
+.. code-block:: sql
 
     Create table dos(
         codi int,
@@ -114,13 +132,6 @@ UNIQUE | UNIQUE KEY
 Exemples:
 *********
 
-.. code-block::
-
-    create table mascota(
-        nom varchar(50) primary key,
-        especie varchar(20) check(especie='perro' or especie='gato' or especie='pajaro')
-    );
-
 Crea una taula anomenada t3 que tingui:
 
 - DNI com a clau primària
@@ -128,7 +139,7 @@ Crea una taula anomenada t3 que tingui:
 - email obligatori i amb control de repetits
 - sou obligatori i com a valor mínim 400
   
-.. code-block:: 
+.. code-block:: sql
 
     Create table t3(
         DNI char(9) PRIMARY KEY,
@@ -137,15 +148,44 @@ Crea una taula anomenada t3 que tingui:
         sou float check(sou>=400) not null
     );
 
+El sou està entre 400 i 2000
+
+.. code-block:: sql
+
+    Create table persona(
+        DNI char(9) PRIMARY KEY,
+        nom varchar(50) not null,
+        email varchar(50) unique not null,
+        sou float check(sou<=400 and sou>=2000) not null
+    );
+
 Crea una taula anomenada t4 que tingui:
 
 - num-habitacio clau primària
 - tipus amb valors possibles doble, triple o suite. Utilitza check
 
 
-.. code-block::
+.. code-block:: sql
 
     Create table t4(
         num_habitacio smallint PRIMARY KEY,
         tipus varchar(20) check(tipus='doble' or tipus='triple' or tipus='suite')
+    );
+
+
+
+
+OPCIONS DE COLUMNA
+==================
+
+Per no tenir més d'una clau primària s'afegeix un id
+
+Afegim un id que s'auto incrementa quan anem afegint elements a la taula
+
+.. code-block:: sql
+
+    create table alumne (
+        id smallint primary key auto_increment comment='id auto-incrementat',
+        nom varchar(20),
+        telefon integer
     );
