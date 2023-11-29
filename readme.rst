@@ -206,17 +206,10 @@ Exemple:
 --- RESTRICCIONS DE TAULA ---
 =============================
 
-PRIMARY KEY
-***********
-
-UNIQUE
-******
-
-CHECK
-*****
-
-CONSTRAINT
-**********
+- PRIMARY KEY
+- UNIQUE
+- CHECK
+- CONSTRAINT
 
 .. code-block:: sql
 
