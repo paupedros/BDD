@@ -204,6 +204,7 @@ Exemple:
     );
 
 --- RESTRICCIONS DE TAULA ---
+=============================
 
 PRIMARY KEY
 ***********
