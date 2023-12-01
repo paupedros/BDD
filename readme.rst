@@ -272,7 +272,7 @@ Model correcte:
         model varchar(20),
         dni char(9),
         CONSTRAINT pk_coche PRIMARY KEY(matricula),
-	    CONSTRAINT fk_coche FOREIGN KEY(dni) REFERENCES persona(dni)
+	CONSTRAINT fk_coche FOREIGN KEY(dni) REFERENCES persona(dni)
     );
 
 DNI obligatori
@@ -285,7 +285,7 @@ DNI obligatori
         model varchar(20),
         dni char(9) NOT NULL,
         CONSTRAINT pk_coche PRIMARY KEY(matricula),
-	    CONSTRAINT fk_coche FOREIGN KEY(dni) REFERENCES persona(dni)
+	CONSTRAINT fk_coche FOREIGN KEY(dni) REFERENCES persona(dni)
     );
 
 INSERT
