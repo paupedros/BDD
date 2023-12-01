@@ -304,5 +304,5 @@ CARREGAR ARXIUS A BASE DE DADES
 
 .. code-block:: sql
 
-    source <ruta de l'arxiu>
+    source [ruta de l'arxiu]
 
