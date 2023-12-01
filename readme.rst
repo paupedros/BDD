@@ -299,3 +299,10 @@ Per insertar un valor d'una foreign key aquesta ha d'estar a la taula d'on prov√
     insert into persona values('2222B', 'Moises');
     insert into coche values('B1111A', 'BMW', 'M5', '1111A');
 
+CARREGAR ARXIUS A BASE DE DADES
+===============================
+
+.. code-block:: sql
+
+    source <ruta de l'arxiu>
+
