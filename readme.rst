@@ -238,7 +238,9 @@ Exemple:
 FOREIGN KEY
 ***********
 
-CONSTRAINT nom 
+[CONSTRAINT nom] FOREIGN KEY (col name, ...) REFERENCES ``TAULA`` (col name, ...)
+    [ON DELETE ``POLITICA``]
+    [ON UPDATE ``POLITICA``]
 
 
 Model exemple:
