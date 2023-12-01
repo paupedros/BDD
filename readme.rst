@@ -243,7 +243,7 @@ CONSTRAINT nom
 
 Model exemple:
 
-.. code-block::
+.. code-block:: sql
 
     CREATE TABLE persona (
         dni char(9),
@@ -278,7 +278,6 @@ Model correcte:
 DNI obligatori
 
 .. code-block:: sql
-    :emphasize-lines: 5
 
     CREATE TABLE coche (
         matricula char(9),
