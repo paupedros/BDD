@@ -10,10 +10,10 @@
 /* comentari */
 
 
-DROP TABLE IF EXISTS equipo
-DROP TABLE IF EXISTS jugador
-DROP TABLE IF EXISTS estadisticas
-DROP TABLE IF EXISTS partido
+DROP TABLE IF EXISTS equipo;
+DROP TABLE IF EXISTS jugador;
+DROP TABLE IF EXISTS estadisticas;
+DROP TABLE IF EXISTS partido;
 
 
 CREATE TABLE equipo(
