@@ -19,22 +19,22 @@ DROP TABLE IF EXISTS partido;
 CREATE TABLE equipo(
 	nombre varchar(20) not null,
 	ciudad varchar(20) not null,
-	conferencia varchar(4) not null,
-	division varchar(9) not null
+	conferencia char(4) not null,
+	division char(9) not null
 );
 
 CREATE TABLE jugador(
 	codigo int not null,
 	nombre varchar(30) not null,
 	procedencia varchar(20),
-	altura varchar(4),
+	altura char(4),
 	peso smallint,
-	posicio varchar(1)
+	posicio char(1)
 );
 
 CREATE TABLE estadisticas(
 	codigo int not null,
-	temporada varchar(5) not null,
+	temporada char(5) not null,
 	puntos_por_partido float DEFAULT 0,
 	assistencias_por_partido float DEFAULT 0,
 	tapones_por_partido float DEFAULT 0,
@@ -43,8 +43,9 @@ CREATE TABLE estadisticas(
 
 CREATE TABLE partido(
 	codigo int not null,
-	nombre varchar(30) not null,
-	puntos_local int,
-	puntos_visitante int,
-	temporada varchar(5)
+	equipo_local varchar(20) not null,
+	equipo_visitante varchar(20) not null,
+	puntos_local smallint,
+	puntos_visitante smallint,
+	temporada char(5) not null
 );
