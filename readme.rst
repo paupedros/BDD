@@ -374,3 +374,20 @@ RENAME
 .. code-block:: sql
 
     alter table producte RENAME column proveidor to marca;
+
+
+Exemple:
+    Modifica la taula t1 de forma que l'atribut nom complet 
+    sigui varchar de 300 caracters
+
+.. code-block:: sql
+
+    alter table t1 modify column nomComplet varchar(300);
+
+Exemple:
+    Modifica la taula t1 de forma que l'atribut edat passi 
+    a anomenar-se data_naixement i sigui de tipus data
+
+.. code-block:: sql
+
+    alter table t1 change column edat data_naixement data;
