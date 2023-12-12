@@ -356,7 +356,7 @@ Quan només volem canviar la definició
 
 .. code-block:: sql
 
-    alter table producte modify column marca varchar(200);
+    alter table producte MODIFY column marca varchar(200);
 
 CHANGE
 ------
@@ -365,6 +365,12 @@ Modificar nom i definició de la columna
 
 .. code-block:: sql
 
-    alter table producte change marca proveidor varchar(75);
+    alter table producte CHANGE marca proveidor varchar(75);
 
 
+RENAME
+------
+
+.. code-block:: sql
+
+    alter table producte RENAME column proveidor to marca;
