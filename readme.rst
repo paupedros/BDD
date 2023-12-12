@@ -331,3 +331,34 @@ Exemple:
     alter table t2 add column metres smallint;
     alter table t2 add column te_nevera BOOLEAN after tipus;    
 
+
+ELIMINAR COLUMNES
+*****************
+
+.. code-block:: sql
+
+    alter table producte drop column proveidor;
+
+Exemple:
+    Modifica la taula t2 i elimina la columna anomenada te_nevera
+
+.. code-block:: sql
+
+    alter table t2 drop column te_nevera;
+
+MODIFICAR COLUMNES
+******************
+
+MODIFY
+######
+
+Quan només volem canviar la definició
+
+.. code-block:: sql
+
+    alter table producte modify column marca varchar(200);
+
+CHANGE
+######
+
+
