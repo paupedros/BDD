@@ -308,3 +308,26 @@ CARREGAR ARXIUS A BASE DE DADES
 
     source [ruta de arxiu]
 
+MODIFICACIONS A LES TAULES
+==========================
+
+AFEGIR COLUMNES
+***************
+
+.. code-block:: sql
+
+    alter table producte add column marca varchar(100);
+    alter table producte add column proveidor varchar(100) not null after nom;
+
+    alter table producte add column id integer primary key first;
+
+
+Exemple:
+    Modifica la taula t2 i afegeix una columna anomenada metres.
+    Modifica la taula t2 i afegeix una columna anomenada te_nevera però ha d'estar situada just després de la columna tipus
+
+.. code-block:: sql
+
+    alter table t2 add column metres smallint;
+    alter table t2 add column te_nevera BOOLEAN after tipus;    
+
