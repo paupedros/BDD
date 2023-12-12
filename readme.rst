@@ -350,7 +350,7 @@ MODIFICAR COLUMNES
 ******************
 
 MODIFY
-######
+------
 
 Quan només volem canviar la definició
 
@@ -359,6 +359,12 @@ Quan només volem canviar la definició
     alter table producte modify column marca varchar(200);
 
 CHANGE
-######
+------
+
+Modificar nom i definició de la columna
+
+.. code-block:: sql
+
+    alter table producte change marca proveidor varchar(75);
 
 
