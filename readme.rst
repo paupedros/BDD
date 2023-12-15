@@ -242,6 +242,11 @@ FOREIGN KEY
     [ON DELETE ``POLITICA``]
     [ON UPDATE ``POLITICA``]
 
+Politiques:
+    CASCADE
+    RESTRICT (per defecte)
+    SET NULL
+
 
 Model exemple:
 
@@ -391,3 +396,21 @@ Exemple:
 .. code-block:: sql
 
     alter table t1 change column edat data_naixement data;
+
+
+AFEGIR RESTRICCIONS
+*******************
+
+.. code-block:: sql
+
+    alter table producte ADD CONSTRAINT pk_producte PRIMARY KEY(id);
+
+    alter table producte ADD CONSTRAINT ch_preu check (preu>=0);
+
+ELIMINAR RESTRICCIONS
+*********************
+
+.. code-block:: sql
+
+    alter table producte drop CONSTRAINT ch_preu;
+    alter table producte drop primary key;
