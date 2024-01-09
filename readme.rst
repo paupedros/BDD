@@ -30,7 +30,7 @@ Utilitzar una database
 
     use nom;
 
------------ Taules ----------- 
+----------- Taules -----------
 ==============================
 
 Crear una taula amb diferents tipus de dades
@@ -138,7 +138,7 @@ Crea una taula anomenada t3 que tingui:
 - nom obligatori
 - email obligatori i amb control de repetits
 - sou obligatori i com a valor mínim 400
-  
+
 .. code-block:: sql
 
     Create table t3(
@@ -334,7 +334,7 @@ Exemple:
 .. code-block:: sql
 
     alter table t2 add column metres smallint;
-    alter table t2 add column te_nevera BOOLEAN after tipus;    
+    alter table t2 add column te_nevera BOOLEAN after tipus;
 
 
 ELIMINAR COLUMNES
@@ -382,7 +382,7 @@ RENAME
 
 
 Exemple:
-    Modifica la taula t1 de forma que l'atribut nom complet 
+    Modifica la taula t1 de forma que l'atribut nom complet
     sigui varchar de 300 caracters
 
 .. code-block:: sql
@@ -390,7 +390,7 @@ Exemple:
     alter table t1 modify column nomComplet varchar(300);
 
 Exemple:
-    Modifica la taula t1 de forma que l'atribut edat passi 
+    Modifica la taula t1 de forma que l'atribut edat passi
     a anomenar-se data_naixement i sigui de tipus data
 
 .. code-block:: sql
@@ -414,3 +414,36 @@ ELIMINAR RESTRICCIONS
 
     alter table producte drop CONSTRAINT ch_preu;
     alter table producte drop primary key;
+
+DML
+###
+
+CRUD
+    Create Read Update Delete
+
+INSERT
+------
+
+.. code-block:: sql
+
+    INSERT INTO t1
+    values('1111A', 'Pau', '2005/01/22', 'home', 2500.53, 'pauelmejor@pau.com', 640867377, true);
+    INSERT INTO t1
+    values('2222D', 'Joan', '2003/05/31', 'home', null, null, 93247343, true);
+    INSERT INTO t1 (dni, nom)
+    values('3333B', 'Vivian);
+
+Quan hi ha un auto_increment, hem d'especificar tots els camps restants menys el que s'incrementa
+
+.. code-block:: sql
+
+    INSERT INTO t5 (model, marca, matricula, bastidor, color)
+    values('SEAT', 'Ibiza', '1111A', 1234, 'Blanc');
+
+DELETE
+------
+
+.. code-block:: sql
+
+    delete from t5 where codi=1;
+
