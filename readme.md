@@ -1,7 +1,6 @@
 # SQL
 
-\-\-\-\-\-\-\-\-\-\-- Comandes
-\-\-\-\-\-\-\-\-\-\--================================
+## Comandes
 
 ## Entrar a mysql
 
@@ -27,8 +26,7 @@ create database nom;
 use nom;
 ```
 
-\-\-\-\-\-\-\-\-\-\-- Taules
-\-\-\-\-\-\-\-\-\-\--==============================
+# Taules
 
 ## Crear una taula amb diferents tipus de dades
 
@@ -52,26 +50,30 @@ show tables;
 desc nomTaula;
 ```
 
-\-\-\-\-\-- TIPUS DE DADES \-\-\-\-\--============================
+# TIPUS DE DADES
 
-\-\-- TEXT \-\--\*\*\*\*\*\*\*\*\*\*\*\* .. code-block:: sql
+## TEXT
+``` sql
+char(tamany)
+```
+*Longitud fixa (allarga els caracters fins al tamany amb espais si fa falta)*
 
-> char(tamany)
->
-> :   Longitud fixa (allarga els caracters fins al tamany amb espais si
->     fa falta)
->
-> varchar(tamany maxim)
->
-> :   Longitud variable (ocupa el valor que se li dona)
->
-> text
->
-> :   TINYTEXT TEXT MEDIUMTEXT LONGTEXT
->
-> enum(\'Element1\', \'Element2\')
+``` sql
+varchar(tamany maxim)
+```
+*Longitud variable (ocupa el valor que se li dona)*
 
-\-\-- DATA I HORA \-\--\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+``` sql
+text
+```
+*TINYTEXT TEXT MEDIUMTEXT LONGTEXT*
+
+``` sql
+enum('Element1', 'Element2')
+```
+
+
+## DATA I HORA
 
 Date
 
@@ -81,7 +83,7 @@ DateTime
 
 Year
 
-\-\-- RESTRICCIONS DE COLUMNA \-\--===============================
+# RESTRICCIONS DE COLUMNA
 
 -   Una taula només pot tenir una clau primària
 -   La clau primària no accepta duplicats ni valors NULL
@@ -162,10 +164,9 @@ Create table t4(
 
 ### OPCIONS DE COLUMNA
 
-Per no tenir més d\'una clau primària s\'afegeix un id
+Per no tenir més d'una clau primària s'afegeix un id
 
-Afegim un id que s\'auto incrementa quan anem afegint elements a la
-taula
+Afegim un id que s'auto incrementa quan anem afegint elements a la taula
 
 ``` sql
 create table alumne (
@@ -188,7 +189,7 @@ create TABLE t5(
 );
 ```
 
-\-\-- RESTRICCIONS DE TAULA \-\--=============================
+### RESTRICCIONS DE TAULA
 
 -   PRIMARY KEY
 -   UNIQUE
@@ -221,13 +222,13 @@ CREATE TABLE persona(
 
 ## FOREIGN KEY
 
-\[CONSTRAINT nom\] FOREIGN KEY (col name, \...) REFERENCES `TAULA` (col name, \...)
+*[CONSTRAINT nom] FOREIGN KEY (col name, ...) REFERENCES TAULA (col name, ...)*
 
-:   \[ON DELETE `POLITICA`\] \[ON UPDATE `POLITICA`\]
+*[ON DELETE POLITICA] [ON UPDATE POLITICA]*
 
 Politiques:
 
-:   CASCADE RESTRICT (per defecte) SET NULL
+*CASCADE RESTRICT (per defecte) SET NUL*L
 
 Model exemple:
 
@@ -278,8 +279,7 @@ CONSTRAINT fk_coche FOREIGN KEY(dni) REFERENCES persona(dni)
 
 ## INSERT
 
-Per insertar un valor d\'una foreign key aquesta ha d\'estar a la taula
-d\'on prové
+*Per insertar un valor d'una foreign key aquesta ha d'estar a la taula d'on prové*
 
 ``` sql
 insert into persona values('1111A', 'Vivian');
@@ -306,9 +306,7 @@ alter table producte add column id integer primary key first;
 
 Exemple:
 
-:   Modifica la taula t2 i afegeix una columna anomenada metres.
-    Modifica la taula t2 i afegeix una columna anomenada te_nevera però
-    ha d\'estar situada just després de la columna tipus
+*Modifica la taula t2 i afegeix una columna anomenada metres. Modifica la taula t2 i afegeix una columna anomenada te_nevera però ha d'estar situada just després de la columna tipus*
 
 ``` sql
 alter table t2 add column metres smallint;
@@ -323,7 +321,7 @@ alter table producte drop column proveidor;
 
 Exemple:
 
-:   Modifica la taula t2 i elimina la columna anomenada te_nevera
+*Modifica la taula t2 i elimina la columna anomenada te_nevera*
 
 ``` sql
 alter table t2 drop column te_nevera;
@@ -333,7 +331,7 @@ alter table t2 drop column te_nevera;
 
 #### MODIFY
 
-Quan només volem canviar la definició
+*Quan només volem canviar la definició*
 
 ``` sql
 alter table producte MODIFY column marca varchar(200);
@@ -341,8 +339,7 @@ alter table producte MODIFY column marca varchar(200);
 
 #### CHANGE
 
-Modificar nom i definició de la columna
-
+*Modificar nom i definició de la columna*
 ``` sql
 alter table producte CHANGE marca proveidor varchar(75);
 ```
@@ -355,8 +352,7 @@ alter table producte RENAME column proveidor to marca;
 
 Exemple:
 
-:   Modifica la taula t1 de forma que l\'atribut nom complet sigui
-    varchar de 300 caracters
+*Modifica la taula t1 de forma que l'atribut nom complet sigui varchar de 300 caracters*
 
 ``` sql
 alter table t1 modify column nomComplet varchar(300);
@@ -364,8 +360,7 @@ alter table t1 modify column nomComplet varchar(300);
 
 Exemple:
 
-:   Modifica la taula t1 de forma que l\'atribut edat passi a
-    anomenar-se data_naixement i sigui de tipus data
+*Modifica la taula t1 de forma que l'atribut edat passi a anomenar-se data_naixement i sigui de tipus data*
 
 ``` sql
 alter table t1 change column edat data_naixement data;
@@ -400,7 +395,7 @@ values('1111A', 'Pau', '2005/01/22', 'home', 2500.53, 'pauelmejor@pau.com', 6408
 INSERT INTO t1
 values('2222D', 'Joan', '2003/05/31', 'home', null, null, 93247343, true);
 INSERT INTO t1 (dni, nom)
-values('3333B', 'Vivian);
+values('3333B', 'Vivian');
 ```
 
 Quan hi ha un auto_increment, hem d\'especificar tots els camps restants
@@ -425,4 +420,5 @@ set color='negro'
 where codi=2;
 ```
 *Canvia el valor color a negro al element de codi 2*
+
 
