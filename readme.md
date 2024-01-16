@@ -387,7 +387,7 @@ CRUD
 
 Create Read Update Delete
 
-#### INSERT
+## INSERT
 
 ``` sql
 INSERT INTO t1
@@ -406,19 +406,175 @@ INSERT INTO t5 (model, marca, matricula, bastidor, color)
 values('SEAT', 'Ibiza', '1111A', 1234, 'Blanc');
 ```
 
-#### DELETE
+## DELETE
 
 ``` sql
 delete from t5 where codi=1;
 ```
 
-#### UPDATE
+## UPDATE
 
+*Canvia el valor color a negro al element de codi 2*
 ``` sql
 update t5
 set color='negro'
 where codi=2;
 ```
-*Canvia el valor color a negro al element de codi 2*
+## SELECT
 
+### LIKE
+
+**% - Qualsevol cadena**
+
+**_ - Un caracter qualsevol**
+
+*Estudiant que el seu nom comenci per Lois*
+``` sql
+select * from estudiant
+where nom LIKE 'Lois%';
+```
+
+### ORDER BY
+*Ordenar els estudiants per any*
+
+``` sql
+select * from estudiant
+order by anyo;
+```
+
+*Ordenar els estudiants per any i alfabeticament*
+``` sql
+select * from estudiant
+order by anyo, nom;
+```
+
+*Ordenar els estudiants per any, casa i alfabeticament*
+``` sql
+select * from estudiant
+order by anyo, casa_id, nom;
+```
+
+*Ordenar els estudiants per any decreixent, casa i alfabeticament*
+``` sql
+select * from estudiant
+order by anyo desc, casa_id, nom;
+```
+
+## FUNCIONS
+
+- **ABS(num)** Valor absolut del número
+
+- **CEIL(num)** Arrodoneix cap a dalt: ceil(6.23)
+
+- **FLOOR(num)** Arrodoneix cap a baix: floor(6.23)
+
+- **MOD(n1, n2)** Residu de la divisió n1 entre n2. És equivalent a l’operador %
+
+- **RAND()** Número aleatori entre 0 i 1
+
+- **ROUND(num[,d])** Arrodoneix el número. Podem indicar amb quants decimals
+
+- **TRUNCATE(num,d)** Elimina decimals. Podem indicar 0 decimals
+
+---
+<br />
+
+*Retorna el valor absolut*
+``` sql
+select abs(-7.4999999);
+--> 7.4999999
+```
+
+
+*Arrodoneix amb 2 decimals*
+``` sql
+select round(7.4999999, 2);
+--> 7.50
+```
+
+*Arrodoneix a l'alça*
+``` sql
+select ceil(7.4999999);
+--> 8
+```
+
+*Arrodoneix cap a baix*
+``` sql
+select floor(7.4999999);
+--> 7
+```
+
+*Mostra el nom, el sou i el sou net amb dos decimals*
+``` sql
+select nom_empl, sou, round(sou*0.91,2) as net
+from empleats;
+/* OUTPUT */
+--> +----------+--------+---------+
+--> | nom_empl | sou    | net     |
+--> +----------+--------+---------+
+--> | Maria    |   2060 |  1874.6 |
+--> | Pere     |   2575 | 2343.25 |
+--> | Anna     | 1905.5 |    1734 |
+--> | Jordi    |   1854 | 1687.14 |
+--> | Clara    |   1545 | 1405.95 |
+--> | Laura    |   1500 |    1365 |
+--> | Roger    |   1236 | 1124.76 |
+--> | Sergi    |   1500 |    1365 |
+--> +----------+--------+---------+
+```
+
+### FUNCIONS DE CARACTERS
+---
+- **CONCAT(s1, s2,..)** Concatena els strings. Si algún és NULL retorna NULL
+- **INSTR(pajar, aguja)** Retorna la posició on troba aguja dins de pajar. 0 si no la troba. instr(nom, ‘w’)
+- **LOWER(str)** Converteix a minúscules.
+- **UPPER(str)** Converteix a majúscules
+---
+
+#### CONCAT
+
+*Concatena els strings*
+``` sql
+select concat('Hola', 'adios');
+--> Holaadios
+```
+
+*Mostra un missatge dient Hola + el nom de l'estudiant*
+``` sql
+select concat('Hola! ', nom) from estudiants;
+--> +---------------------------+
+--> | Hola! Waino Pouros        |
+--> | Hola! Daren Ortiz         |
+--> | Hola! Elbert Moore        |
+--> | Hola! Kaylee Grady        |
+--> | Hola! Elna Jacobs         |
+--> | Hola! Alisha Hartmann     |
+--> | Hola! Mya Dooley          |
+--> | ...                       |
+--> +---------------------------+
+```
+
+#### INSTR
+
+*Retorna la posicio del caracter 'z' dins de nom*
+``` sql
+select nom, INSTR(nom, 'z') from estudiant;
+--> +---------------+-------------------+
+--> | nom           |  INSTR(nom, 'z')  |
+--> +-----------------------------------+
+--> | Waino Pouros  |                 0 |
+--> | Daren Ortiz   |                11 |
+--> +-----------------------------------+
+```
+
+*Retorna els estudiants que tenen la lletra 'd' a partir de la posicio 4*
+``` sql
+select nom, INSTR(nom, 'd') as pos from estudiant where INSTR(nom, 'd')>=4;
+--> +----------------------+-----+
+--> | nom                  | pos |
+--> +----------------------+-----+
+--> | Kaylee Grady         |  11 |
+--> | Mya Dooley           |   5 |
+--> +----------------------+-----+
+```
 
