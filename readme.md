@@ -422,6 +422,13 @@ where codi=2;
 ```
 ## SELECT
 
+### BETWEEN
+*Estudiant que la seva edat estigui entre 13 i 20*
+``` sql
+select * from estudiant
+where edat BETWEEN 13 AND 20;
+```
+
 ### LIKE
 
 **% - Qualsevol cadena**
@@ -577,4 +584,7 @@ select nom, INSTR(nom, 'd') as pos from estudiant where INSTR(nom, 'd')>=4;
 --> | Mya Dooley           |   5 |
 --> +----------------------+-----+
 ```
+
+
+
 
