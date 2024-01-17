@@ -1,3 +1,53 @@
+# Table of contents
+
+- [Table of contents](#table-of-contents)
+- [SQL](#sql)
+  - [Comandes](#comandes)
+  - [Entrar a mysql](#entrar-a-mysql)
+  - [Llistar databases](#llistar-databases)
+  - [Crear databases](#crear-databases)
+  - [Utilitzar una database](#utilitzar-una-database)
+- [Taules](#taules)
+  - [Crear una taula amb diferents tipus de dades](#crear-una-taula-amb-diferents-tipus-de-dades)
+  - [Llistar taules](#llistar-taules)
+  - [Veure taula](#veure-taula)
+- [TIPUS DE DADES](#tipus-de-dades)
+  - [TEXT](#text)
+  - [DATA I HORA](#data-i-hora)
+- [RESTRICCIONS DE COLUMNA](#restriccions-de-columna)
+  - [NULL | NOT NULL](#null--not-null)
+  - [PRIMARY KEY = KEY](#primary-key--key)
+  - [UNIQUE = UNIQUE KEY](#unique--unique-key)
+  - [CHECK](#check)
+  - [DEFAULT](#default)
+  - [Exemples:](#exemples)
+    - [OPCIONS DE COLUMNA](#opcions-de-columna)
+    - [RESTRICCIONS DE TAULA](#restriccions-de-taula)
+  - [FOREIGN KEY](#foreign-key)
+  - [INSERT](#insert)
+    - [CARREGAR ARXIUS A BASE DE DADES](#carregar-arxius-a-base-de-dades)
+    - [MODIFICACIONS A LES TAULES](#modificacions-a-les-taules)
+  - [AFEGIR COLUMNES](#afegir-columnes)
+  - [ELIMINAR COLUMNES](#eliminar-columnes)
+  - [MODIFICAR COLUMNES](#modificar-columnes)
+      - [MODIFY](#modify)
+      - [CHANGE](#change)
+      - [RENAME](#rename)
+  - [AFEGIR RESTRICCIONS](#afegir-restriccions)
+  - [ELIMINAR RESTRICCIONS](#eliminar-restriccions)
+- [DML](#dml)
+  - [INSERT](#insert-1)
+  - [DELETE](#delete)
+  - [UPDATE](#update)
+  - [SELECT](#select)
+    - [BETWEEN](#between)
+    - [LIKE](#like)
+    - [ORDER BY](#order-by)
+    - [FUNCIONS](#funcions)
+    - [FUNCIONS DE CARACTERS](#funcions-de-caracters)
+      - [CONCAT](#concat)
+      - [INSTR](#instr)
+
 # SQL
 
 ## Comandes
@@ -383,6 +433,7 @@ alter table producte drop primary key;
 
 # DML
 
+
 CRUD
 
 Create Read Update Delete
@@ -467,7 +518,7 @@ select * from estudiant
 order by anyo desc, casa_id, nom;
 ```
 
-## FUNCIONS
+### FUNCIONS
 
 - **ABS(num)** Valor absolut del número
 
