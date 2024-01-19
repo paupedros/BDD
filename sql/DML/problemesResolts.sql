@@ -47,3 +47,22 @@ where preu between 9000 and 11000;
 /* 40. Mostra el nom i el preu en euros i dòlars (1€ =1,31 dòlars) de tots els projectes */
 select nom_proj, preu, preu*1.31 as $$$ from projectes;
 
+/* 43. Mostra els empleats que treballen en algun departament de Barcelona ordenats per sou de major a menor */
+SELECT * FROM empleats WHERE Ciutat_dpt='Barcelona' ORDER BY sou DESC;
+
+/* 44. Mostra els empleats que tinguin una ‘g’ al seu nom */
+select * from empleats where nom_empl Like '%g%';
+
+/* 47. Mostra els empleats ordenats descendentment per sou i en cas de sous iguals per nom ascendentment. */
+select * from empleats order by sou desc, nom_empl;
+
+/* 48. Mostra de dos formes diferents els clients que siguin de Barcelona o Tarragona */
+select * from empleats where ciutat_dpt='Barcelona' or ciutat_dpt='Tarragona';
+select * from empleats where ciutat_dpt in ('Barcelona', 'Tarragona');
+
+/* 49. Mostra els empleats que tinguin una ‘g’ al seu nom sense fer servir LIKE */
+select * from empleats where INSTR(nom_empl, 'g') != 0;
+
+/* 51. Mostra els projectes ordenats per la longitud del nom de projecte. */
+select * from projectes order by char_length(nom_proj);
+

@@ -47,6 +47,13 @@
     - [FUNCIONS DE CARACTERS](#funcions-de-caracters)
       - [CONCAT](#concat)
       - [INSTR](#instr)
+      - [CHAR\_LENGTH](#char_length)
+      - [LENGTH](#length)
+      - [LTRIM](#ltrim)
+      - [RTRIM](#rtrim)
+      - [REPLACE](#replace)
+      - [REVERSE](#reverse)
+      - [SUBSTRING](#substring)
 
 # SQL
 
@@ -587,6 +594,13 @@ from empleats;
 - **INSTR(pajar, aguja)** Retorna la posició on troba aguja dins de pajar. 0 si no la troba. instr(nom, ‘w’)
 - **LOWER(str)** Converteix a minúscules.
 - **UPPER(str)** Converteix a majúscules
+- **CHAR_LENGTH(str)** Número de caràcters d’un string
+- **LENGTH(str)** Longitud en bytes del string
+- **LTRIM(str)** Elimina els espais en blanc per la esquerra
+- **RTRIM(str)** Elimina els espais en blanc per la dreta
+- **REPLACE(in, s1, s2)** Canvia totes les aparicions de s1 per s2. Replace(nom, ‘a’,’bb’)
+- **REVERSE(string)** Inverteix la cadena
+- **SUBSTRING(str, pos, long)** Retorna la cadena desde la posició indicada i amb el número de caràcters indicats o fins al final
 ---
 
 #### CONCAT
@@ -636,6 +650,81 @@ select nom, INSTR(nom, 'd') as pos from estudiant where INSTR(nom, 'd')>=4;
 --> +----------------------+-----+
 ```
 
+#### CHAR_LENGTH
 
+*Retorna la llargada del string*
+``` sql
+select nom, char_length(nom) from t1;
+--> +------+------------------+
+--> | nom  | char_length(nom) |
+--> +------+------------------+
+--> | Pau  |                3 |
+--> | Joan |                4 |
+--> | Álex |                4 |
+--> +------+------------------+
+```
 
+#### LENGTH
 
+*Retorna la llargada en bytes del string*
+``` sql
+select nom, length(nom) from t1;
+--> +------+-------------+
+--> | nom  | length(nom) |
+--> +------+-------------+
+--> | Pau  |           3 |
+--> | Joan |           4 |
+--> | Álex |           5 |
+--> +------+-------------+
+```
+
+#### LTRIM
+
+*Treu els espais en blanc de la esquerra*
+``` sql
+select nom, ltrim(nom) from harry.estudiant where nom like '%kir%';
+--> +------------------+------------------+
+--> | nom              | ltrim(nom)       |
+--> +------------------+------------------+
+--> | Kirk Lehner      | Kirk Lehner      |
+--> |  Kirsten Leffler | Kirsten Leffler  |
+--> +------------------+------------------+
+```
+
+#### RTRIM
+
+*Treu els espais en blanc de la dreta*
+``` sql
+select nom, rtrim(nom) from harry.estudiant;
+```
+
+#### REPLACE
+``` sql
+select replace(nom, 'a', '*') from harry.estudiant;
+--> +------------------------+
+--> | W*ino Pouros           |
+--> | D*ren Ortiz            |
+--> | Elbert Moore           |
+--> | K*ylee Gr*dy           |
+--> +------------------------+
+```
+
+#### REVERSE
+``` sql
+select reverse(nom) from harry.estudiant;
+--> +----------------------+
+--> | soruoP oniaW         |
+--> | zitrO neraD          |
+--> | erooM treblE         |
+--> +----------------------+
+```
+
+#### SUBSTRING
+``` sql
+select substring(nom, 3, 4) from harry.estudiant;
+--> +----------------------+
+--> | ino                  |
+--> | ren                  |
+--> | bert                 |
+--> +----------------------+
+```
