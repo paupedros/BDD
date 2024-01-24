@@ -790,6 +790,7 @@ date_format([data], [format])
 ```
 ***Format posible:***
 | %Y | Any 4 digits | %d | Dia del mes   | %s | Segons                         |
+| -- | ------------ | -- | ------------- | -- | ------------------------------ |
 | %y | Any 2 digits | %H | Hora 24 hores | %W | Nom dia de la setmana          |
 | %M | Nom del mes  | %h | Hora 12 hores | %w | Dia de la setmana (0 diumenge) |
 | %m | Mes          | %i | Minuts        | %p | AM o PM                        |
