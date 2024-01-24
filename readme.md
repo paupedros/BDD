@@ -54,6 +54,7 @@
       - [REPLACE](#replace)
       - [REVERSE](#reverse)
       - [SUBSTRING](#substring)
+    - [FUNCIONS DE DATES](#funcions-de-dates)
 
 # SQL
 
@@ -728,3 +729,92 @@ select substring(nom, 3, 4) from harry.estudiant;
 --> | bert                 |
 --> +----------------------+
 ```
+
+### FUNCIONS DE DATES
+
+***Per saber la data actual:***
+
+- now() Retorna la data i hora actuals
+- sysdate() Equivalent a now()
+- curdate() Retorna la data actual
+- curtime() Retorna la hora actual
+
+``` sql
+select sysdate();
+--> 2024-01-24 08:58:54
+
+select curdate();
+--> 2024-01-
+
+select curtime();
+--> 09:01:20
+```
+
+***Per extreure una part d'una data:***
+
+- **year(data):** Extreu l’any.
+- **month(data):** Extreu el mes
+- **day(data):** Extreu el dia
+- **time(data):** Retorna la hora. minuts i segons actual
+- **hour(data):** Extreu la hora
+- **minute(data):** Extreu els minuts
+- **second(data):** Extreu els segons
+
+``` sql
+select year(now());
+--> 2024
+
+select month(now());
+--> 1
+
+select day(now());
+--> 14
+
+select time(now());
+--> 09:04:53
+
+select hour(now());
+--> 9
+
+select minute(now());
+--> 5
+
+select second(now());
+--> 43
+```
+
+***Per donar format a una data***
+
+``` sql
+date_format([data], [format])
+```
+***Format posible:***
+| %Y | Any 4 digits | %d | Dia del mes   | %s | Segons                         |
+| -- | ------------ | -- | ------------- | -- | ------------------------------ |
+| %y | Any 2 digits | %H | Hora 24 hores | %W | Nom dia de la setmana          |
+| %M | Nom del mes  | %h | Hora 12 hores | %w | Dia de la setmana (0 diumenge) |
+| %m | Mes          | %i | Minuts        | %p | AM o PM                        |
+
+
+*Mostrar la data actual en format dia-NomMes-Any*
+
+``` sql
+select date_format(now(), '%d-%M-%Y');
+--> +--------------------------------+
+--> | date_format(now(), '%d-%M-%Y') |
+--> +--------------------------------+
+--> | 24-January-2024                |
+--> +--------------------------------+
+```
+
+***Per treballar amb intervals de temps***
+
+
+adddate(data, dies)
+subdate(data, dies)
+
+adddate(data, interval)
+subdate(data, interval)
+
+datediff(data1, data2)
+timestampdiff(int, d1, d2)
