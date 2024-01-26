@@ -55,6 +55,8 @@
       - [REVERSE](#reverse)
       - [SUBSTRING](#substring)
     - [FUNCIONS DE DATES](#funcions-de-dates)
+    - [FUNCIONS DE CONVERSIO](#funcions-de-conversio)
+    - [FUNCIONS DE NULL](#funcions-de-null)
 
 # SQL
 
@@ -809,7 +811,6 @@ select date_format(now(), '%d-%M-%Y');
 
 ***Per treballar amb intervals de temps***
 
-
 adddate(data, dies)
 subdate(data, dies)
 
@@ -818,3 +819,36 @@ subdate(data, interval)
 
 datediff(data1, data2)
 timestampdiff(int, d1, d2)
+
+### FUNCIONS DE CONVERSIO
+
+- **cast(exp AS tipus):** Converteix la expressió al tipus indicat
+- **convert(exp, tipus):** Converteix la expressió al tipus indicat
+
+Els tipus possibles són: CHAR, DATE, TIME,
+DATETIME, SIGNED i UNSIGNED
+
+<br>
+
+*Convertim un text com a nombre amb signe*
+
+```sql
+select cast('3' as signed);
+--> 3
+
+select convert('3', signed);
+--> 3
+```
+
+### FUNCIONS DE NULL
+
+- **coalesce(ex1, ex2…):** Retorna el primer valor no null de la llista
+
+<br>
+
+*Mostrem el nom i el id de la seva casa, si es NULL ho indicarem amb 'Desconocido'*
+
+``` sql
+SELECT nom, coalesce(casa_id, 'Desconocido') FROM profe;
+```
+

@@ -70,3 +70,10 @@ select * from empleats where INSTR(nom_empl, 'g');
 
 /* 51. Mostra els projectes ordenats per la longitud del nom de projecte. */
 select * from projectes order by char_length(nom_proj);
+
+/* 55. Mostra per als projectes que no hagin finalitzat, el nom i un camp que seria una
+nova data teórica: la data prevista de fi + 2 mesos. */
+select nom_proj, adddate(data_prev_fi, Interval 2 Month) from projectes where data_fi is null;
+
+/* 56. Mostra la durada prevista dels projectes en dies. */
+select timestampdiff(DAY, Data_inici, data_prev_fi) from projectes;
