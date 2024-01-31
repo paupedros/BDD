@@ -77,3 +77,5 @@ select nom_proj, adddate(data_prev_fi, Interval 2 Month) from projectes where da
 
 /* 56. Mostra la durada prevista dels projectes en dies. */
 select timestampdiff(DAY, Data_inici, data_prev_fi) from projectes;
+
+

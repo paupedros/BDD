@@ -39,24 +39,27 @@
   - [INSERT](#insert-1)
   - [DELETE](#delete)
   - [UPDATE](#update)
-  - [SELECT](#select)
+  - [SELECT - CONSULTES](#select---consultes)
     - [BETWEEN](#between)
     - [LIKE](#like)
     - [ORDER BY](#order-by)
     - [FUNCIONS](#funcions)
-    - [FUNCIONS DE CARACTERS](#funcions-de-caracters)
-      - [CONCAT](#concat)
-      - [INSTR](#instr)
-      - [CHAR\_LENGTH](#char_length)
-      - [LENGTH](#length)
-      - [LTRIM](#ltrim)
-      - [RTRIM](#rtrim)
-      - [REPLACE](#replace)
-      - [REVERSE](#reverse)
-      - [SUBSTRING](#substring)
-    - [FUNCIONS DE DATES](#funcions-de-dates)
-    - [FUNCIONS DE CONVERSIO](#funcions-de-conversio)
-    - [FUNCIONS DE NULL](#funcions-de-null)
+      - [FUNCIONS DE CARACTERS](#funcions-de-caracters)
+        - [CONCAT](#concat)
+        - [INSTR](#instr)
+        - [CHAR\_LENGTH](#char_length)
+        - [LENGTH](#length)
+        - [LTRIM](#ltrim)
+        - [RTRIM](#rtrim)
+        - [REPLACE](#replace)
+        - [REVERSE](#reverse)
+        - [SUBSTRING](#substring)
+      - [FUNCIONS DE DATES](#funcions-de-dates)
+      - [FUNCIONS DE CONVERSIO](#funcions-de-conversio)
+      - [FUNCIONS DE NULL](#funcions-de-null)
+    - [UNIÓ DE TAULES](#unió-de-taules)
+      - [PRODUCTE CARTESIÀ](#producte-cartesià)
+      - [JOIN IGUALTAT](#join-igualtat)
 
 # SQL
 
@@ -481,7 +484,7 @@ update t5
 set color='negro'
 where codi=2;
 ```
-## SELECT
+## SELECT - CONSULTES
 
 ### BETWEEN
 *Estudiant que la seva edat estigui entre 13 i 20*
@@ -591,7 +594,7 @@ from empleats;
 --> +----------+--------+---------+
 ```
 
-### FUNCIONS DE CARACTERS
+#### FUNCIONS DE CARACTERS
 ---
 - **CONCAT(s1, s2,..)** Concatena els strings. Si algún és NULL retorna NULL
 - **INSTR(pajar, aguja)** Retorna la posició on troba aguja dins de pajar. 0 si no la troba. instr(nom, ‘w’)
@@ -606,7 +609,7 @@ from empleats;
 - **SUBSTRING(str, pos, long)** Retorna la cadena desde la posició indicada i amb el número de caràcters indicats o fins al final
 ---
 
-#### CONCAT
+##### CONCAT
 
 *Concatena els strings*
 ``` sql
@@ -629,7 +632,7 @@ select concat('Hola! ', nom) from estudiants;
 --> +---------------------------+
 ```
 
-#### INSTR
+##### INSTR
 
 *Retorna la posicio del caracter 'z' dins de nom*
 ``` sql
@@ -653,7 +656,7 @@ select nom, INSTR(nom, 'd') as pos from estudiant where INSTR(nom, 'd')>=4;
 --> +----------------------+-----+
 ```
 
-#### CHAR_LENGTH
+##### CHAR_LENGTH
 
 *Retorna la llargada del string*
 ``` sql
@@ -667,7 +670,7 @@ select nom, char_length(nom) from t1;
 --> +------+------------------+
 ```
 
-#### LENGTH
+##### LENGTH
 
 *Retorna la llargada en bytes del string*
 ``` sql
@@ -681,7 +684,7 @@ select nom, length(nom) from t1;
 --> +------+-------------+
 ```
 
-#### LTRIM
+##### LTRIM
 
 *Treu els espais en blanc de la esquerra*
 ``` sql
@@ -694,14 +697,14 @@ select nom, ltrim(nom) from harry.estudiant where nom like '%kir%';
 --> +------------------+------------------+
 ```
 
-#### RTRIM
+##### RTRIM
 
 *Treu els espais en blanc de la dreta*
 ``` sql
 select nom, rtrim(nom) from harry.estudiant;
 ```
 
-#### REPLACE
+##### REPLACE
 ``` sql
 select replace(nom, 'a', '*') from harry.estudiant;
 --> +------------------------+
@@ -712,7 +715,7 @@ select replace(nom, 'a', '*') from harry.estudiant;
 --> +------------------------+
 ```
 
-#### REVERSE
+##### REVERSE
 ``` sql
 select reverse(nom) from harry.estudiant;
 --> +----------------------+
@@ -722,7 +725,7 @@ select reverse(nom) from harry.estudiant;
 --> +----------------------+
 ```
 
-#### SUBSTRING
+##### SUBSTRING
 ``` sql
 select substring(nom, 3, 4) from harry.estudiant;
 --> +----------------------+
@@ -732,7 +735,7 @@ select substring(nom, 3, 4) from harry.estudiant;
 --> +----------------------+
 ```
 
-### FUNCIONS DE DATES
+#### FUNCIONS DE DATES
 
 ***Per saber la data actual:***
 
@@ -820,7 +823,7 @@ subdate(data, interval)
 datediff(data1, data2)
 timestampdiff(int, d1, d2)
 
-### FUNCIONS DE CONVERSIO
+#### FUNCIONS DE CONVERSIO
 
 - **cast(exp AS tipus):** Converteix la expressió al tipus indicat
 - **convert(exp, tipus):** Converteix la expressió al tipus indicat
@@ -840,7 +843,7 @@ select convert('3', signed);
 --> 3
 ```
 
-### FUNCIONS DE NULL
+#### FUNCIONS DE NULL
 
 - **coalesce(ex1, ex2…):** Retorna el primer valor no null de la llista
 
@@ -852,3 +855,60 @@ select convert('3', signed);
 SELECT nom, coalesce(casa_id, 'Desconocido') FROM profe;
 ```
 
+### UNIÓ DE TAULES
+
+#### PRODUCTE CARTESIÀ
+*El producte cartesià de dos taules són totes les combinacions possibles resultat d’unir les dos taules (tots amb tots, NxM)*
+<hr>
+<br>
+
+``` sql
+select * from profe, casa;
+--> 40 rows
+```
+
+#### JOIN IGUALTAT
+
+*Consisteix en aplicar el filtre:*
+
+    FOREIGN_KEY = PRIMARY KEY
+
+*El filtre hauria de ser aixi, pero les dues taules tenen l'atribut id*
+
+``` sql
+select distinct * from profe, casa where casa_id = id;
+--> ERROR 1052 (23000): Column 'id' in where clause is ambiguous
+```
+
+*Indicarem de la taula que son els atributs*
+
+```sql
+select distinct * from profe, casa where profe.casa_id = casa.id;
+--> +----+--------------------+---------+----+------------+
+--> | id | nom                | casa_id | id | nom        |
+--> +----+--------------------+---------+----+------------+
+--> |  4 | Pomona Sprout      |       1 |  1 | Hufflepuff |
+--> |  2 | Minerva McGonagall |       2 |  2 | Gryffindor |
+--> |  3 | Filius Flitwick    |       3 |  3 | Ravenclaw  |
+--> |  1 | Severus Snape      |       4 |  4 | Slytherin  |
+--> +----+--------------------+---------+----+------------+
+```
+
+*Mostrem el nom del profe i la seva casa*
+
+``` sql
+select profe.nom as 'Nom profe', casa.nom as 'Nom casa' from profe, casa where casa_id = casa.id;
+--> +--------------------+------------+
+--> | Nom profe          | Nom casa   |
+--> +--------------------+------------+
+--> | Pomona Sprout      | Hufflepuff |
+--> | Minerva McGonagall | Gryffindor |
+--> | Filius Flitwick    | Ravenclaw  |
+--> | Severus Snape      | Slytherin  |
+--> +--------------------+------------+
+```
+
+*Mostrem el nom del alumne i la seva casa*
+``` sql
+select estudiant.nom, casa.nom from estudiant, casa where estudiant.casa_id = casa.id;
+```
