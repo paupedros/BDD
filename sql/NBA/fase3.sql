@@ -76,6 +76,8 @@ SELECT DISTINCT Procedencia FROM jugador WHERE Lower(Nombre) LIKE('%y%') AND Nom
 /* Mostra el nom dels equips (sense repetits) que entre les temporades 98/99 i
 00/01 hagin guanyat a casa per una diferència de 103 punts o més. El resultat
 hauria d’aparèixer ordenat pel nom de l’equip */
-SELECT DISTINCT equipo_local FROM partido WHERE  ORDER BY equipo_local;
+SELECT DISTINCT equipo_local FROM partido WHERE temporada IN('98/99','99/00','00/01')
+	AND cast(puntos_local AS signed)-cast(puntos_visitante AS SIGNED)>=103
+	ORDER BY equipo_local;
 
 
