@@ -60,6 +60,7 @@
     - [UNIÓ DE TAULES](#unió-de-taules)
       - [PRODUCTE CARTESIÀ](#producte-cartesià)
       - [JOIN IGUALTAT](#join-igualtat)
+      - [JOIN 99](#join-99)
 
 # SQL
 
@@ -912,3 +913,7 @@ select profe.nom as 'Nom profe', casa.nom as 'Nom casa' from profe, casa where c
 ``` sql
 select estudiant.nom, casa.nom from estudiant, casa where estudiant.casa_id = casa.id;
 ```
+
+#### JOIN 99
+
+**Natural Join**

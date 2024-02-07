@@ -60,9 +60,9 @@ SELECT Nombre, Peso, Altura, Posicion FROM jugador WHERE (Peso>280 AND Posicion=
 SELECT Nombre, Nombre_equipo, 
 CONCAT(substring(SUBSTRING(TRIM(Altura),1,1)*30.5 + SUBSTRING(TRIM(Altura),3)*2.54, 1, 3)/100, ' m') AS 'Altura M'
 FROM jugador 
-WHERE substring(SUBSTRING(TRIM(Altura),1,1)*30.5 + SUBSTRING(TRIM(Altura),3)*2.54, 1, 3)/100 > 2 AND
-substring(SUBSTRING(TRIM(Altura),1,1)*30.5 + SUBSTRING(TRIM(Altura),3)*2.54, 2, 4)>15 AND
-(Nombre_equipo='Knicks' OR Nombre_equipo='Pistons');
+WHERE substring(SUBSTRING(TRIM(Altura),1,1)*30.5 + SUBSTRING(TRIM(Altura),3)*2.54, 1, 3)/100 > 2 
+AND substring(SUBSTRING(TRIM(Altura),1,1)*30.5 + SUBSTRING(TRIM(Altura),3)*2.54, 2, 4)>15 
+AND (Nombre_equipo='Knicks' OR Nombre_equipo='Pistons');
 
 -- SUBSTRING(TRIM(Altura),1,1)*30.5 -- x cm
 -- SUBSTRING(TRIM(Altura),3)*2,54 -- y cm

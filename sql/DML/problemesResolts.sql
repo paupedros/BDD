@@ -78,4 +78,17 @@ select nom_proj, adddate(data_prev_fi, Interval 2 Month) from projectes where da
 /* 56. Mostra la durada prevista dels projectes en dies. */
 select timestampdiff(DAY, Data_inici, data_prev_fi) from projectes;
 
+/* 61 */
+
+
+/* 62 */
+
+
+/* 63. Mostra la informació dels clients i dels projectes que tenen contractats en
+format SQL-92 i SQL-99 */
+select clients.Nom_cli, projectes.Nom_proj from clients NATURAL JOIN projectes;
+select clients.Nom_cli, projectes.Nom_proj from clients JOIN projectes ON (projectes.Codi_cli = clients.Codi_cli);
+select clients.Nom_cli, projectes.Nom_proj from clients JOIN projectes USING (Codi_cli);
+
+
 
