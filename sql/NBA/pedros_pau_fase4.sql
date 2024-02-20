@@ -1,3 +1,4 @@
+-- Active: 1708085547008@@127.0.0.1@3306@nba
 /* Per als jugadors espanyols que siguin base i dels que tinguem informació
 estadística de les temporades 06/07 o 07/08, es demana que mostris els punts
 i els rebots per partit. El resultat ha d’aparèixer ordenat per temporada i, en cas
@@ -22,7 +23,7 @@ ORDER BY estadisticas.temporada , estadisticas.Puntos_por_partido DESC;
 /* Mostra el nom de l’equip, el nom del jugador, la posició que ocupa i l’alçada dels
 jugadors que siguin d’algun equip de Los Angeles i medeixin 7 peus o mes. */
 
-SELECT 
+SELECT
     equipo.Nombre,
     jugador.Nombre,
     jugador.Posicion,
@@ -41,7 +42,7 @@ assistències i els rebots per partit dels jugadors que tinguin més de 25 punts
 per partit i o bé més de 7 assistències per partit o bé més de 12 rebots per
 partit. */
 
-SELECT 
+SELECT
     jugador.Nombre,
     jugador.Nombre_equipo,
     estadisticas.Temporada,
@@ -55,8 +56,8 @@ WHERE
     estadisticas.Puntos_por_partido > 25
         AND (estadisticas.Asistencias_por_partido > 7
         OR estadisticas.Rebotes_por_partido > 12);
-        
-        
+
+
 /* Mostra una columna que anomenarem LOCAL amb el nom de l’equip local i
 entre parèntesis la seva ciutat, com per exemple Celtics (Boston), una columna
 que anomenarem visitant amb el nom de l’equip visitant i entre parèntesis la
@@ -66,7 +67,7 @@ de tots els partits en els que s’hagin enfrontat un equip local de la conferè
 est amb un equip visitant de la conferència Oest i hagin guanyat els visitants
 per una diferència de més de 100 punts. */
 
-SELECT 
+SELECT
     CONCAT(partido.equipo_local, ' ', loc.Ciudad) AS 'LOCAL',
     CONCAT(partido.equipo_visitante,
             ' ',
@@ -91,7 +92,7 @@ per partit. Es demana que mostris el nom del jugador, l’equip i entre parènte
 la ciutat de l’equip, la posició que ocupa el jugador i els punts per partit del
 jugador. */
 
-SELECT 
+SELECT
     jugador.Nombre,
     CONCAT(jugador.Nombre_equipo,
             ' (',
