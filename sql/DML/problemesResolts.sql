@@ -90,5 +90,26 @@ select clients.Nom_cli, projectes.Nom_proj from clients NATURAL JOIN projectes;
 select clients.Nom_cli, projectes.Nom_proj from clients JOIN projectes ON (projectes.Codi_cli = clients.Codi_cli);
 select clients.Nom_cli, projectes.Nom_proj from clients JOIN projectes USING (Codi_cli);
 
+/* 66. Mostra el nombre de clients que hi ha a la base de dades */
+select count(*) from clients;
+
+/* 68. Mostra el nombre de clients que siguin de Tarragona */
+select count(*) from clients where Ciutat = 'Tarragona';
+
+/* 69. Mostra el nombre de clients que no siguin de Tarragona */
+select count(*) from clients where Ciutat != 'Tarragona';
+
+/* 74. Mostra per a cada projecte el número d’empleats que hi treballen */
+select projectes.`Nom_proj`, projectes.Codi_proj, count(*)
+    from empleats
+    JOIN projectes
+        on (empleats.`Codi_proj`= projectes.`Codi_proj`)
+    GROUP BY Codi_proj;
+
+select projectes.`Nom_proj`, projectes.Codi_proj, count(`Codi_empl`)
+    from empleats
+    RIGHT JOIN projectes
+        on (empleats.`Codi_proj`= projectes.`Codi_proj`)
+    GROUP BY Codi_proj;
 
 
