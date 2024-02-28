@@ -113,3 +113,33 @@ select projectes.`Nom_proj`, projectes.Codi_proj, count(`Codi_empl`)
     GROUP BY Codi_proj;
 
 
+select empleats.nom_Empl
+from empleats
+where `Codi_proj` =
+(select `Codi_proj` from empleats where `nom_Empl`='Maria')
+and `nom_Empl`!='Maria';
+
+select *
+from projectes
+where `Data_inici` >
+    (select `Data_inici`
+    from projectes
+    where `Nom_proj`='Tinell');
+
+
+select nom_empl
+from empleats
+where codi_proj in
+(select codi_proj
+    from projectes
+    where `Codi_cli`=
+        (select `Codi_cli`
+        from clients
+        where `Nom_cli`='ECIGSA')
+    );
+
+select nom_empl
+from empleats
+where sou > any
+    (select avg(sou)
+    from empleats);
