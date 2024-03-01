@@ -90,3 +90,26 @@ HAVING
 ORDER BY
     temporades desc,
     promig_ppp desc;
+
+/* Pregunta 5:
+Mostra el codi i el promig de punts (es busca el promig total no el d’una
+temporada) dels jugadors espanyols sense fer servir cap join (ni sql 92 ni sql
+99). Arrodoneix el promig de punts a 2 decimals. */
+select codigo, round(avg(`Puntos_por_partido`),2) as promig
+from estadisticas
+where codigo in (select codigo from jugador where `Procedencia` = 'Spain')
+group by codigo;
+
+
+/* Pregunta 6:
+Mostra el codi, el nom del jugador, el nom de l’equip, la temporada i els punts
+per partit de tots els jugadors que en alguna temporada hagin obtingut els
+mateixos o més punts per partit que els màxims punts per partit que hagi tingut
+algun jugador dels ‘Lakers’. */
+select jugador.codigo, jugador.Nombre, `Nombre_equipo`, estadisticas.temporada, estadisticas.`Puntos_por_partido`
+from jugador
+join estadisticas on (estadisticas.codigo = jugador.codigo)
+where `Nombre_equipo` != 'Lakers'
+and `Puntos_por_partido` >=
+(select max(`Puntos_por_partido`) from estadisticas where estadisticas.codigo in
+(select codigo from jugador where `Nombre_equipo` = 'Lakers'));

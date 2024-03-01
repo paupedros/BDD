@@ -750,7 +750,7 @@ select sysdate();
 --> 2024-01-24 08:58:54
 
 select curdate();
---> 2024-01-
+--> 2024-01-24
 
 select curtime();
 --> 09:01:20

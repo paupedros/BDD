@@ -143,3 +143,12 @@ from empleats
 where sou > any
     (select avg(sou)
     from empleats);
+
+/* 83 Mostra els empleats que cobren més que el sou promig */
+select Nom_proj
+from projectes
+where
+    datediff(`Data_prev_fi`, `Data_inici`) >
+    (select avg(datediff(`Data_prev_fi`,`Data_inici`))
+    from projectes);
+
