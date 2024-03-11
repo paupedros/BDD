@@ -50,10 +50,12 @@ having count(pokemon_tipo.numero_pokedex) > 15;
 
 /* 9. Mostra el nom dels pokemons i de quants tipus és però només dels
 pokemon que siguin de més d’un tipus (resultat: 63) */
-select pokemon.nombre, count(pokemon_tipo.id_tipo) from pokemon
-join pokemon_tipo on (pokemon.numero_pokedex = pokemon_tipo.numero_pokedex)
+select pokemon.nombre, count(*)
+from pokemon
+join pokemon_tipo
+on (pokemon.numero_pokedex = pokemon_tipo.numero_pokedex)
 group by pokemon.nombre
-having count(pokemon_tipo.id_tipo) >= 2;
+having count(*) >= 2;
 
 /* 10. Mostra els pokemon que tinguin més velocitat que el pokemon
 amb número de pokedex 128 (resultat: 8) */

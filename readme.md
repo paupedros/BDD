@@ -917,3 +917,5 @@ select estudiant.nom, casa.nom from estudiant, casa where estudiant.casa_id = ca
 #### JOIN 99
 
 **Natural Join**
+
+![Meme de SQL](https://miro.medium.com/v2/resize:fit:800/1*DTET9ngrx2Gzu6ZJk0G9BQ.jpeg)
