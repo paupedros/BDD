@@ -62,6 +62,7 @@
       - [JOIN IGUALTAT](#join-igualtat)
       - [JOIN 99](#join-99)
 
+
 # SQL
 
 ## Comandes
