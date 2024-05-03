@@ -27,92 +27,80 @@ end;
 
 /* Requeriment 2 */
 create or replace function kgToLliures(num float) return int is
-result int;
+    result int;
 begin
-result:=abs(num*2.2046);
-return result;
+    result:=abs(num*2.2046);
+    return result;
 end;
 
 /* Requeriment 3 */
 create or replace function lliuresToKg(num int) return float is
-result float;
+    result float;
 begin
-result:=round(num/2.2046,2);
-return result;
+    result:=round(num/2.2046,2);
+    return result;
 end;
 
 /* Requeriment 4 */
 create or replace function esAlcadaValida(text varchar2) return int is
-newText varchar2(10000);
-nums varchar2(2);
-len int;
+    newText varchar2(10000);
+    nums varchar2(2);
+    len int;
 begin
-newText:=treureespais(text);
-   
-    
+    newText:=treureespais(text); 
 -- Si el guio no esta en la seva posicio
-if instr(newText, '-')!=2  then
-return 0;
-end if;
--- Si la llargada es diferent a 4 no es valid
-if length(newText) != 4 and length(newText) !=3 then
-return 0;
-end if;
-len:=length(newText);
-
-
-
--- Peus
-nums:=substr(text,1,1);
-if not ascii(nums) between ascii('0') and ascii('9') then
+    if instr(newText, '-')!=2  then
     return 0;
-end if;
-
--- Polzades
-if len=3 then
-    nums:=substr(text,3,1);
-else
-    nums:=substr(text,3,2);
-end if;
-if not ascii(nums) between ascii('0') and ascii('9') then
-return 0;
-elsif cast(nums as integer) > 11 and cast(nums as integer) >=0 then
-return 0;
-end if;
-
-return 1;
+    end if;
+-- Si la llargada es diferent a 4 no es valid
+    if length(newText) != 4 and length(newText) !=3 then
+    return 0;
+    end if;
+    len:=length(newText);
+    -- Peus
+    nums:=substr(text,1,1);
+    if not ascii(nums) between ascii('0') and ascii('9') then
+        return 0;
+    end if;
+    -- Polzades
+    if len=3 then
+        nums:=substr(text,3,1);
+    else
+        nums:=substr(text,3,2);
+    end if;
+    if not ascii(nums) between ascii('0') and ascii('9') then
+    return 0;
+    elsif cast(nums as integer) > 11 and cast(nums as integer) >=0 then
+    return 0;
+    end if;
+    return 1;
 end;
 
 
 /* Requeriment 5 */
 create or replace function peusToCm(text varchar2) return float is
-newText varchar2(10000);
-len int;
-cm float;
-peus int;
-polzades int;
+    newText varchar2(10000);
+    len int;
+    cm float;
+    peus int;
+    polzades int;
 begin
-newText:=treureespais(text);
-len:=length(newText);
--- Si no es una alçada valida
-if esalcadavalida(text)!=1 then
-return 0;
-end if;
-
--- Peus
-peus:=cast(substr(text,1,1) as int);
-
-
--- Polzades
-if len=3 then
-    polzades:=cast(substr(text,3,1) as int);
-else
-    polzades:=cast(substr(text,3,2) as int);
-end if;
-
-cm:= peus*30.5 + polzades*2.54;
-return cm;
-
+    newText:=treureespais(text);
+    len:=length(newText);
+    -- Si no es una alçada valida
+    if esalcadavalida(text)!=1 then
+    return 0;
+    end if;
+    -- Peus
+    peus:=cast(substr(text,1,1) as int);
+    -- Polzades
+    if len=3 then
+        polzades:=cast(substr(text,3,1) as int);
+    else
+        polzades:=cast(substr(text,3,2) as int);
+    end if;
+    cm:= peus*30.5 + polzades*2.54;
+    return cm;
 end;
 
 
@@ -122,24 +110,16 @@ text varchar2(10000);
 peus int;
 polzades int;
 begin
-
-
--- Polzades
-polzades:=round(cm/2.54);
-
-peus:=trunc(polzades/12);
-polzades:=polzades-(peus*12);
-
-if polzades<10 then
-    text:=peus || '-0' || polzades;
-else
-    text:=peus || '-' || polzades;
-end if;
-
-
-
-return text;
-
+    -- Polzades
+    polzades:=round(cm/2.54);
+    peus:=trunc(polzades/12);
+    polzades:=polzades-(peus*12);
+    if polzades<10 then
+        text:=peus || '-0' || polzades;
+    else
+        text:=peus || '-' || polzades;
+    end if;
+    return text;
 end;
 
 /* Requeriment 7 */
@@ -150,7 +130,6 @@ create or replace function posicioToString(text2 varchar2) return varchar2 is
 begin
     -- Treiem posibles espais
     text:=treureespais(text2);
-
     if length(text) = 1 then
         if text = 'G' then
             return 'Base';
@@ -239,3 +218,135 @@ EXCEPTION
     when excEq then
         dbms_output.put_line('Equip no trobat');
 end;
+
+
+/* Requeriment 2 */
+
+create or replace procedure NouJugadorEuropeu(nom varchar2, proced varchar2, alcada number, pes number, posicio varchar2, equip varchar2) is
+    lliures number;
+    peus varchar2(10000);
+begin
+    lliures:=kgToLliures(pes);
+    peus:=cmtopeus(alcada);
+
+    NouJugador(nom, proced, peus, lliures, posicio, equip);
+Exception
+    when zero_divide then
+        dbms_output.put_line('L''alçada no pot ser 0');
+end;
+
+
+/* Requeriment 4 */
+create or replace procedure ConsultarJugador(codi int) is
+    aux int;
+    juga jugador%Rowtype;
+    equip equipo%Rowtype;
+begin
+    select codigo into aux from jugador where codigo = codi;
+    select * into juga from jugador where codigo = codi;
+    select * into equip from equipo where nombre = juga.nombre_equipo;
+
+    dbms_output.put_line('*******************************************************');
+    dbms_output.put_line('Dades de jugador');
+    dbms_output.put_line('*******************************************************');
+    dbms_output.put_line('CODI: ' || juga.codigo);
+    dbms_output.put_line('NOM: ' || juga.nombre);
+    dbms_output.put_line('EQUIP: ' || equip.nombre || ' ' || equip.ciudad);
+    dbms_output.put_line('CONFERÈNCIA: ' || equip.conferencia || ' DIVISIÓ: ' || equip.division);
+    dbms_output.put_line('POSICIÓ: ' || posicioToString(juga.posicion));
+    dbms_output.put_line('ALÇADA (peus): ' || juga.altura || ' ALÇADA (cm): ' || peusToCm(juga.altura));
+    dbms_output.put_line('PES (lliures): ' || juga.peso || ' PES (Kg): ' || lliuresToKg(juga.peso));
+    dbms_output.put_line('PROCEDÈNCIA: '||juga.procedencia);
+EXCEPTION
+    when no_data_found then
+        dbms_output.put_line('No s''ha trobat el jugador');
+end;
+
+
+/* Requeriment 3 */
+
+create or replace procedure BaixaJugador(codi int) is
+    aux int;
+begin
+    select count(codigo) into aux from jugador where codigo = codi;
+    if aux > 0 then
+        dbms_output.put_line('S''ha donat de baixa correctament al jugador: ' || codi);
+        ConsultarJugador(codi);
+        delete from jugador where codigo = codi;
+    end if;
+    dbms_output.put_line('No s''ha trobat al jugador amb codi: ' || codi);
+end;
+
+
+/* Requeriment 5 */
+
+create or replace procedure ConsultarEstJugador(codi int, temp varchar2) is
+    juga jugador%Rowtype;
+    equip equipo%Rowtype;
+    estaJugador estadisticas%Rowtype;
+    tempor varchar2(5);
+    puntsEquip number;
+    puntsGeneral number;
+    tapsEquip number;
+    tapsGeneral number;
+    assistEquip number;
+    assistGeneral number;
+    rebotesEquip number;
+    rebotesGeneral number;
+begin
+    tempor:=replace(temp, '/', '-');
+
+    select * into juga from jugador where codigo = codi;
+    select * into equip from equipo where nombre = juga.nombre_equipo;
+    select * into estaJugador from estadisticas where temporada = temp and codigo = codi;
+    
+    select avg(puntos_por_partido) into puntsEquip
+    from estadisticas where temporada = temp and
+        codigo in 
+            (select codigo from jugador where nombre_equipo = equip.nombre);
+
+    select avg(puntos_por_partido) into puntsGeneral from estadisticas where temporada = temp;
+    
+    select avg(tapones_por_partido) into tapsEquip
+    from estadisticas where temporada = temp and
+        codigo in 
+            (select codigo from jugador where nombre_equipo = equip.nombre);
+
+    select avg(tapones_por_partido) into tapsGeneral from estadisticas where temporada = temp;
+    
+    select avg(asistencias_por_partido) into assistEquip
+    from estadisticas where temporada = temp and
+        codigo in 
+            (select codigo from jugador where nombre_equipo = equip.nombre);
+
+    select avg(asistencias_por_partido) into assistGeneral from estadisticas where temporada = temp;
+
+    select avg(rebotes_por_partido) into rebotesEquip
+    from estadisticas where temporada = temp and
+        codigo in 
+            (select codigo from jugador where nombre_equipo = equip.nombre);
+
+    select avg(rebotes_por_partido) into rebotesGeneral from estadisticas where temporada = temp;
+
+
+    dbms_output.put_line('*******************************************************');
+    dbms_output.put_line('Dades de jugador');
+    dbms_output.put_line('*******************************************************');
+    dbms_output.put_line('CODI: ' || codi);
+    dbms_output.put_line('NOM: ' || juga.nombre);
+    dbms_output.put_line('EQUIP: ' || equip.nombre || ' ' || equip.ciudad);
+    dbms_output.put_line('TEMPORADA: ' || tempor);
+    dbms_output.put_line('');
+    dbms_output.put_line('             Jugador            Equip            General');
+    dbms_output.put_line('********************************************************');
+    dbms_output.put_line('Punts:             ' || estaJugador.puntos_por_partido || '             ' || round(puntsEquip, 1) || '             ' || round(puntsGeneral, 1));
+    dbms_output.put_line('Taps:              ' || estaJugador.tapones_por_partido || '              ' || round(tapsEquip, 1) || '               ' || round(tapsGeneral, 1));
+    dbms_output.put_line('Assistències:      ' || estaJugador.asistencias_por_partido || '             ' || round(assistEquip, 1) || '             ' || round(assistGeneral, 1));
+    dbms_output.put_line('Rebots:            ' || estaJugador.rebotes_por_partido || '             ' || round(rebotesEquip, 1) || '             ' || round(rebotesGeneral, 1));
+
+Exception
+    when no_data_found then
+        dbms_output.put_line('No s''ha trobat el jugador');
+end;
+
+

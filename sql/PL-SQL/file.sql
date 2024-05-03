@@ -177,3 +177,14 @@ EXCEPTION
 	when others then
 		dbms_output.put_line('ERROR: ' || SQLERRM);
 end;
+
+
+create or replace procedure mostraPokemonPes(pes pokemon.peso%type) is
+	cursor c_pokemon is select nombre from pokemon where peso >= pes;
+	nom varchar2(1000);
+begin
+	for pok in c_pokemon loop
+		dbms_output.put_line(pok.nombre);
+	end loop;
+end;
+
