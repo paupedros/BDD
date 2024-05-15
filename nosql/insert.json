@@ -1,0 +1,7 @@
+
+db.personas.insertOne(
+    {
+        'dni': '11111A',
+        'nom': 'Vivian'
+    }
+);
