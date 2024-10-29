@@ -1,7 +1,26 @@
-
 db.personas.insertOne(
     {
         'dni': '11111A',
-        'nom': 'Vivian'
+        nom: 'Vivian'
     }
 );
+
+db.personas.insertOne(
+    {
+        'nom': 'Moises',
+        data: new Date()
+    }
+);
+
+db.personas.insertOne(
+    {
+        'nom': 'Moises',
+        mascota: {
+            'nom': 'Perro',
+            'raza': 'Chihuahua'
+        },
+        data: new Date(),
+        asignaturas:['DAM-M4', 'DAM-M5']
+    }
+);
+

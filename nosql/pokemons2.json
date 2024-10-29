@@ -1,0 +1,35 @@
+// 1
+db.pokedex2.countDocuments()
+
+// 2
+db.pokedex2.find({num: 25})
+
+// 3
+db.pokedex2.find({num: 25}, {_id: 0, name: 1})
+
+// 4
+db.pokedex2.find({$and: [{num: {$gt: 100}}, {num: {$lt: 110}}]}, {_id: 0, name: 1})
+
+// 5
+db.pokedex2.find({$and: [{num: {$gt: 100}}, {num: {$lt: 110}}]}, {_id: 0, name: 1}).sort({name: 1})
+
+// 6
+db.pokedex2.find({$and: [{num: {$gt: 100}}, {num: {$lt: 110}}]}, {_id: 0, name: 1}).sort({name: -1})
+
+// 11
+db.pokedex2.find({types: ["Rock"]}, {name: 1, types: 1, _id: 0})
+
+// 12
+db.pokedex2.find({types: "Rock"}, {name: 1, types: 1, _id: 0})
+
+// 13
+db.pokedex2.countDocuments({types: "Rock"})
+
+// 14
+db.pokedex2.find({types: {$all: ["Rock", "Electric"]}}, {name: 1, _id: 0})
+
+// 15
+db.pokedex2.find({"stats.attack": {$gt: 150}}, {name: 1, "stats.attack": 1, _id: 0})
+
+// 16
+db.pokedex2.find({"stats.attack": {$gt: 150}}, {name: 1, "stats.attack": 1, _id: 0}).sort({"stats.attack": 1})

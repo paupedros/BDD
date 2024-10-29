@@ -1,0 +1,62 @@
+db.personas.find(
+    {
+        "nom": "Moises"
+    }
+)
+
+/* Pokemons */
+
+db.pokedex.find(
+    {weight:{$lt:10}}
+)
+
+db.pokedex.find({ name:{$in:['Bulbasaur', 'Charmander', 'Squirtle']}})
+
+-- AND OR
+
+db.pokedex.find(
+    {$and: 
+        [
+            {height: {$gt: 1} }, 
+            {weight: {$lt: 90} }
+        ]
+    }
+)
+
+db.pokedex.find({$or: [{name: "Charmander"}, {name: "Bulbasaur"}]})
+
+-- CountDocuments
+
+db.pokedex.countDocuments({
+        weight: {$gt: 10}
+})
+
+-- limit i sort
+db.pokedex.find().limit(3)
+
+db.pokedex.find().sort({name:1}) // Ascendent
+db.pokedex.find().sort({name:-1}) // Descendent
+
+// Exemples
+
+// Quants pokemons tenen alçada superior a 1
+db.pokedex.countDocuments({height: {$gt: 1}})
+
+// Pokemons ordenats per pes
+db.pokedex.find().sort({weight:1})
+
+
+// Projeccions
+db.pokedex.find({}, {name:1})
+db.pokedex.find({}, {name:1, _id:0})
+db.pokedex.find({}, {name:1, _id:0}).sort({name:1})
+
+// Exemples
+
+db.pokedex.find({}, {name: 1, weight: 1, _id: 0}).sort({weight: -1}).limit(2)
+
+// Arrays
+db.pokedex.find({types: "Fire"}) // Pokemons que siguin fire
+
+db.pokedex.find({types: ["Fire"]}) // Pokemons que NOMES siguin fire
+
